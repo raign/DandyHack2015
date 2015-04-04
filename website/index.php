@@ -44,7 +44,8 @@ $path = "../img/";
 	try {
 			echo '<p>', 'Database pull (TINDER) as of ', date("Y-m-d H:i:s"), '</p>';
 			$rand_id = mt_rand(1, 32);
-			$rand_id_next = mt_rand(1,33);
+			$sql = "SELECT * FROM images WHERE id = '$rand_id';";
+			$rand_id_next = mt_rand(1,100);
 			echo "query = " . $sql;
 			echo "</br>";
 			foreach ($db->query($sql) as $row) {
