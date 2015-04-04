@@ -33,27 +33,15 @@ $path = "../img/";
     	<div class="container">
 			<h1>CAT: League of Dick Pics</h1>
 
-<<<<<<< HEAD
 <?php
 			echo $q;
 ?>
 			<a href="#" onclick="return getOutput();"> test </a>
 			<div id="output">waiting for action</div>
-=======
-	<?php
-		require_once 'dbsetup.php';
-		
-echo $q;
-    ?>
-    
-<a href="#" onclick="return getOutput();"> test </a>
-<div id="output">waiting for action</div>
->>>>>>> origin/stage
 
 			<div id="swipeBox" ontouchstart="touchStart(event,'swipeBox');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 <?php
 	try {
-<<<<<<< HEAD
 			echo '<p>', 'Database pull (TINDER) as of ', date("Y-m-d H:i:s"), '</p>';
 			$rand_id = mt_rand(1, 32);
 			$sql = "select * from images where id = '$rand_id';";
@@ -63,20 +51,6 @@ echo $q;
 			foreach ($db->query($sql) as $row) {
 				//echo $path.$id.'.jpg';
 				echo "<img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height='800' width='800'>";
-=======
-	    echo '<p>', 'Database pull (TINDER) as of ', date("Y-m-d H:i:s"), '</p>';
-
-		
-		$rand_id = mt_rand(1, 100);
-	    $sql = "select * from images where id = '$rand_id';";
-		echo "query = " . $sql;
-		echo "</br>";
-		
-	    foreach ($db->query($sql) as $row)
-	    {		
-			//echo $path.$id.'.jpg';
-			echo "<img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height='800' width='800'>";
->>>>>>> origin/stage
 			}
 		} catch(PDOException $e) {
 			print "Error!: " . $e->getMessage() . "<br/>";
