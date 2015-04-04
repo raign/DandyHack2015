@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+	    .centered {
+		text-align: center;
+	    }
+	    TABLE {
+		border-collapse: collapse;
+	    }
+	    TH {
+		vertical-align: top;
+		padding: 4px;
+	    }
+	    TD {
+		vertical-align: top;
+		border: 1pt solid grey;
+		padding: 4px;
+	    }
+	    TD.firstrow {
+		border-top: 2pt solid grey;
+		border-color: green grey grey grey;
+	    }
