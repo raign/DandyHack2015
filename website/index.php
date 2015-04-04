@@ -31,7 +31,6 @@
 
 	<?php
 		require_once 'dbsetup.php';
-		//include 'response.php';
 		
 echo $q;
     ?>
@@ -45,11 +44,11 @@ echo $q;
 	    echo '<p>', 'Database pull (TINDER) as of ', date("Y-m-d H:i:s"), '</p>';
 
 		
-		$rand_id = mt_rand(1, 32);
+		$rand_id = mt_rand(1, 100);
 	    $sql = "select * from images where id = '$rand_id';";
-		$rand_id_next = mt_rand(1,33);
 		echo "query = " . $sql;
 		echo "</br>";
+		
 	    foreach ($db->query($sql) as $row)
 	    {		
 			//echo $path.$id.'.jpg';
