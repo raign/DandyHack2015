@@ -8,6 +8,8 @@ using System.Collections.Generic;
 
 public class parse_controller: MonoBehaviour {
 	Texture2D asdf;
+	Texture2D ass;
+	string status = "";
 	int img_num =0;
 	ParseObject test;
 	string score = "";
@@ -46,12 +48,14 @@ public class parse_controller: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () 
-	{
-		if (Input.GetKeyDown("down")) {
+	{		
+		//if(Input.GetKeyDown("down"))
+		if (Input.GetTouch(0).phase == TouchPhase.Began)
+		{			
 			//StopCoroutine(loadFile ());
-			next = true;
 			count++;
 			Debug.Log ("down: " + count);
+			status = "DOWN";
 			//StartCoroutine (loadFile());
 		}
 	}
@@ -78,45 +82,53 @@ public class parse_controller: MonoBehaviour {
 	
 	void Awake()
 	{
-		id [1] = "bOL9HnLMqn";
-		id [2] = "j1HBJC9b4T";
 	}
 
+	Texture2D [] pic_arr = new Texture2D[3];
 
 	void Start()   //single method downloads file
 	{
-		StartCoroutine (loadFile ());
+		id [1] = "bOL9HnLMqn";
+		id [2] = "j1HBJC9b4T";
+
+		for (int i=1; i< 3; i++) 
+		{
+			StartCoroutine (loadFile (i));
+		}
 	}
 	
-	IEnumerator loadFile()
+	IEnumerator loadFile(int ii)
 	{
-			ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "objectId" , id[1]);
-			
-			var queryTask = query.FirstAsync();
-			
-			while (!queryTask.IsCompleted) yield return null;
-			
-			ParseObject obj = queryTask.Result;
-			ParseFile pfile = obj.Get<ParseFile>("Image" );
-			Debug.Log (pfile.Url.AbsoluteUri);
-			var imageRequest = new WWW(pfile.Url.AbsoluteUri);
-			yield return imageRequest;   
-			Debug.Log ("imageRequest " + imageRequest.text);
-			//renderer.material.mainTexture = imageRequest.texture;
-			renderer.material.mainTexture = imageRequest.texture;
-			
-			asdf = imageRequest.texture;
+		Debug.Log ("load file");
+		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "objectId" , id[ii]);
 
-			yield return null;
+		var queryTask = query.FirstAsync();
+			
+		while (!queryTask.IsCompleted) yield return null;
+			
+		ParseObject obj = queryTask.Result;
+		ParseFile pfile = obj.Get<ParseFile>("Image" );
+		Debug.Log (pfile.Url.AbsoluteUri);
+		var imageRequest = new WWW(pfile.Url.AbsoluteUri);
+		yield return imageRequest;   
+		Debug.Log ("imageRequest " + imageRequest.text);
+		//renderer.material.mainTexture = imageRequest.texture;
+		renderer.material.mainTexture = imageRequest.texture;
+
+		pic_arr[ii] = imageRequest.texture;
+
+		//yield return ass;
 	}
 
 	void OnGUI()
 	{
 
-		if (asdf != null) {
-			sample.normal.background = asdf;
+		if (pic_arr[count]!=null) 
+		{
+			sample.normal.background = pic_arr[count];
+				//pic_arr[0];
 		}
-		GUI.Box (new Rect (Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "asdf", sample);
+		GUI.Box (new Rect (Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "asdf: "+ status, sample);
 
 	}
 

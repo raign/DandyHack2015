@@ -51,11 +51,14 @@
      <Compile Include="Assets\script\Game_Setup.js" />
      <Compile Include="Assets\script\heart_button.js" />
      <Compile Include="Assets\script\picture_controller.js" />
+     <None Include="Assets\AssetStoreFiles\README.txt" />
+     <None Include="Assets\Parse\Parse.Unity.xml" />
+     <None Include="Assets\Parse\README.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Parse.Unity">
- <HintPath>/Users/alexwong/Documents/Apps/[Hackathon 2015] Tinder/Cute_animal_tinder/Assets/Parse.Unity.dll</HintPath>
+ <HintPath>/Users/alexwong/Documents/Apps/[Hackathon 2015] Tinder/Cute_animal_tinder/Assets/Parse/Parse.Unity.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
