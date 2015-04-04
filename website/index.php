@@ -50,7 +50,7 @@ $path = "../img/";
 			echo "</br>";
 			foreach ($db->query($sql) as $row) {
 				//echo $path.$id.'.jpg';
-				echo "<img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height='800' width='800'>";
+				echo "<img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height='75%' width='75%'>";
 			}
 		} catch(PDOException $e) {
 			print "Error!: " . $e->getMessage() . "<br/>";
