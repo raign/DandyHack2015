@@ -20,7 +20,7 @@
 	var swipeDirection = null;
 	var path = "img/";
 	var MIN = 1;
-	var MAX = 32;
+	var MAX = 100;
 	// The 4 Touch Event Handlers
 	
 	// NOTE: the touchStart handler should also receive the ID of the triggering element
