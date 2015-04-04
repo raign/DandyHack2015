@@ -13,7 +13,7 @@ $_SESSION['table'];
 $_SESSION['email'];
 $_SESSION['time_ordered'];
 $q = $_GET['name'];
-$path = "../img/";
+$path = "img/";
 
 ?>
 <!DOCTYPE html>
