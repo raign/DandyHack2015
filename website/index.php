@@ -1,10 +1,4 @@
 <?php
-/*
- * File: project-teams.php
- * Purpose:  show teams, their current members and their captain
- * Modified by: Hans Koomen
- * Modified on: 2015-02-16
- */
 require_once 'dbsetup.php';
 session_start();
 $var_val = 'Test';
