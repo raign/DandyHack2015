@@ -246,7 +246,7 @@ function rightButton(){
 	//update in database if +1
 	doAction({img_num: img.dataset.num}).done(function(data) {
 		if(data.success) {
-			alert("we did it reddit!");
+			//alert("we did it reddit!");
 			//alert(JSON.stringify(data));
 		}
 		}).fail(function(j, t, e) {

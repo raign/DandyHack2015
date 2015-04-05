@@ -41,9 +41,9 @@ $path = "img/";
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">CAT: League of Dick Pics</a>
-              <a href = "top10.php">
-              <button class="btn btn-warning btn-lg" onclick="top10.php"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+		      <a class="navbar-brand" href="#">CAT: TOP 10 Cutest Pictures</a>
+              <a href = "index.php">
+              <button class="btn btn-warning btn-lg" onclick="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 		   	</a>
             </div>
             
@@ -57,11 +57,8 @@ $path = "img/";
 			<div id="swipeBox" ontouchstart="touchStart(event,'swipeBox');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 <?php
 				try {
-					$rand_id = mt_rand(1, 100);
-					$sql = "SELECT * FROM images WHERE id = '$rand_id';";
-					$rand_id_next = mt_rand(1,100);
+					$sql = "SELECT * FROM images ORDER BY upvotes DESC limit 10";
 					foreach ($db->query($sql) as $row) {
-						//echo $path.$id.'.jpg';
 						echo "<div class=\"row\"><div class=\"col-xs-10 col-xs-offset-1\"><img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height=auto width='100%'></div></div>";
 					}
 				} catch(PDOException $e) {
