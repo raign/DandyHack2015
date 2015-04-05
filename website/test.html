@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js">
-</script>
-<script>
-$(document).ready(function(){
-    $("button").click(function(){
-        $("p").hide();
-    });
-});
-</script>
 </head>
 <body>
 
@@ -18,7 +9,20 @@ $(document).ready(function(){
 <p>This is a paragraph.</p>
 <p>This is another paragraph.</p>
 
-<button>Click me</button>
+<button class = "clicker">Click me</button>
+<style>
+.clicker { 
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    background: #000000; 
+    padding: 20px;
+}
 
+.clicker:hover { 
+    background: #eee;
+}
+</style>
 </body>
 </html>

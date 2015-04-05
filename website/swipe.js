@@ -126,10 +126,8 @@
 			var img = document.getElementById("image_shown");
 			img.src = path.concat(id);
 			img.dataset.num = id;
-			swipedElement.style.backgroundColor = 'orange';
-			
-			
-			
+			swipedElement.style.backgroundColor = 'red';
+			//swipedElement.style.backgroundColor = 'white';
 			
 		} else if ( swipeDirection == 'right' ) {
 			
@@ -153,6 +151,8 @@
 			
 			//change background color
 			swipedElement.style.backgroundColor = 'green';
+			//swipedElement.style.backgroundColor = 'white';
+
 		} 
 	}
 		
