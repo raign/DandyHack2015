@@ -255,7 +255,7 @@ public class parse_controller: MonoBehaviour {
 		float def_pic_x = Screen.width/2 - pic_width/2;
 		float def_pic_y = (float)(Screen.height * 0.2);
 
-		GUI.Label (new Rect (Screen.width / 2, (float)(def_pic_y * 0.8) + (float)(pic_width * 1.3), Screen.width/8, Screen.width/16), "", views);
+		GUI.Label (new Rect (Screen.width / 2, (float)(def_pic_y * 0.38) + (float)(pic_width * 1.3), Screen.width/8, Screen.width/16), "", views);
 		//GUI.Label (new Rect (Screen.width / 2, (float)(def_pic_y * 0.8) + (float)(pic_width * 1.3), Screen.width / 8, Screen.width / 8), "", views);
 
 
@@ -265,23 +265,25 @@ public class parse_controller: MonoBehaviour {
 
 			pic.fontSize = Screen.width / 10;
 
+			icon.fontSize = Screen.width/6;
 			if (rank_count > 0) {
-				if (GUI.Button (new Rect (Screen.width / 8 - Screen.width / 16, Screen.height / 2, Screen.width / 8, Screen.width / 8), "<", icon)) {
+				if (GUI.Button (new Rect (0, Screen.height/2, Screen.width / 8, Screen.width / 8), "<", icon)) {
 					rank_count--;
 					Debug.Log ("count: " + rank_count + "||  ranking: " + rank_id_arr[rank_count]);
 				}
 			}
 			if (rank_count < 9) {
-				if (GUI.Button (new Rect ((float)(Screen.width * 0.875) - Screen.width / 16, Screen.height / 2, Screen.width / 8, Screen.width / 8), ">", icon)) {
+				if (GUI.Button(new Rect(Screen.width - Screen.width/6, Screen.height/2, Screen.width / 8, Screen.width / 8), ">", icon)) {
 					rank_count++;
 					Debug.Log ("count: " + rank_count + "||  ranking: " + rank_id_arr[rank_count]);
 				}
 			}
 
-			title.fontSize = Screen.width/8;
+			title.fontSize = Screen.width/12;
 			GUI.Label (new Rect(Screen.width/4, Screen.width/8, Screen.width/2, Screen.height/12), "TOP 10 CAT!", title);
 
-			if(GUI.Button(new Rect(Screen.width/2 - (float)(Screen.width*0.35), Screen.height - Screen.height/6, (float)(Screen.width*0.7), Screen.height/8), "Return to Menu", return_icon))
+			return_icon.fontSize = Screen.width/10;
+			if(GUI.Button(new Rect(Screen.width/8 , Screen.height - Screen.height/6, (float)(Screen.width*0.75), Screen.height/8), "Return to Menu", return_icon))
 			{
 				show_leader_board = false;
 			}
