@@ -54,7 +54,7 @@ public class testing : MonoBehaviour {
 	{
 
 		//Texture2D omg = parse_controller.pic_arr[0];
-		mouse = true;
+		mouse = false;
 		pic_width = Screen.width - Screen.width/3;
 		def_pic_x = Screen.width/2 - pic_width/2;
 		def_pic_y = (float)(Screen.height * 0.2);
