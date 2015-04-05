@@ -45,13 +45,24 @@ $path = "img/";
 					echo "</br>";
 					foreach ($db->query($sql) as $row) {
 						//echo $path.$id.'.jpg';
-						echo "<img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height='300px' width='300px'>";
+						echo "<div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\"><img id = 'image_shown' data-num=$rand_id src='$path$rand_id.jpg' height=auto width='100%'></div></div>";
 					}
 				} catch(PDOException $e) {
 					print "Error!: " . $e->getMessage() . "<br/>";
 					die();
 				}
-?>
+?>		
+			</div>
+			<div class="row">
+				<div class="col-xs-2 col-xs-offset-2">
+					<button class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
+				</div>
+				<div class="col-xs-1 col-xs-offset-1">
+					<button class="btn btn-info btn-lg"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+				</div>
+				<div class="col-xs-2 col-xs-offset-2">
+					<button class="btn btn-success btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+				</div>
 			</div>
 		</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
