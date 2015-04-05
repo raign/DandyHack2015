@@ -19,6 +19,8 @@ public class parse_controller: MonoBehaviour {
 	string[] id = new string[4];
 	bool next = false;
 	public GUIStyle sample;
+	public GUIStyle loading;
+
 	int id_num;
 	int size;
 
@@ -57,8 +59,11 @@ public class parse_controller: MonoBehaviour {
 
 		if (testing.download_more) 
 		{
+			StartCoroutine(wait(3));
+			
 			testing.download_more = false;
 			download_photos (size);
+			StartCoroutine(wait(3));		
 		}
 	}
 
@@ -69,6 +74,8 @@ public class parse_controller: MonoBehaviour {
 		size = 10;
 		id_num = 0;
 		download_photos (10);
+		wait (10);
+
 	}
 
 	void download_photos(int size)
@@ -79,6 +86,16 @@ public class parse_controller: MonoBehaviour {
 			id_num++;
 		}
 	}
+
+
+	IEnumerator wait(int time) {
+		Debug.Log("Before Waiting 2 seconds");
+		load_complete = false;
+		yield return new WaitForSeconds(time);
+		load_complete = true;
+		Debug.Log("After Waiting 2 Seconds");
+	}
+	
 
 	
 	IEnumerator loadFile(int i, int idd)
@@ -107,7 +124,7 @@ public class parse_controller: MonoBehaviour {
 	void OnGUI()
 	{
 		if (!load_complete) {
-			GUI.Box (new Rect (Screen.width / 4, Screen.height /12, Screen.width / 2, Screen.height / 2), "LOADING...");
+			GUI.Box (new Rect (Screen.width/4, Screen.height/2 - Screen.height/8, Screen.width/2, Screen.height/6), "LOADING...", loading);
 		}
 
 		if (pic_arr[count]!=null) 
