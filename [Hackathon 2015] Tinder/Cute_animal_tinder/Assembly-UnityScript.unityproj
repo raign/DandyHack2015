@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GM.js" />
      <Compile Include="Assets\script\Game_Layout.js" />
      <Compile Include="Assets\script\Game_Manager.js" />
      <Compile Include="Assets\script\Game_Setup.js" />

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 public class parse_controller: MonoBehaviour {
 	public static Texture2D [] pic_arr = new Texture2D[10];
 
+	public static int [] ids = new int[10];
+	public static int j = 0;
+
 	string status = "";
 	bool load_complete = false;
 	int img_num =0;
@@ -65,6 +68,15 @@ public class parse_controller: MonoBehaviour {
 			download_photos (size);
 			StartCoroutine(wait(3));		
 		}
+
+		if (testing.d) { // if dislike is true
+			testing.d = false;
+			incrementor(-1);
+		}
+		if (testing.l) { // if like is true
+			testing.l = false;
+			incrementor(1);
+		}
 	}
 
 
@@ -75,6 +87,8 @@ public class parse_controller: MonoBehaviour {
 		id_num = 0;
 		download_photos (10);
 		wait (10);
+
+		leadership ();
 
 	}
 
@@ -87,6 +101,23 @@ public class parse_controller: MonoBehaviour {
 		}
 	}
 
+	void incrementor(int i) 
+	{
+		ParseQuery<ParseObject> votes = ParseObject.GetQuery("TestObject").WhereEqualTo("id_num", ids[j]); // Get the image id
+		
+		var votesTask = votes.FirstAsync().ContinueWith(t => {
+			ParseObject obj = t.Result;
+			obj.Increment("votes", i);
+			obj.Increment("Views");
+			Debug.Log("id_num: " + ids[j] + " vote: " + i);
+			obj.SaveAsync();
+		});
+		
+		j++;
+		if (j == 10) {
+			j = 0;
+		}
+	}
 
 	IEnumerator wait(int time) {
 		Debug.Log("Before Waiting 2 seconds");
@@ -97,10 +128,46 @@ public class parse_controller: MonoBehaviour {
 	}
 	
 
-	
+	void leadership()
+	{
+		/*
+		Debug.Log ("leader");
+		ParseQuery<ParseObject> query = ParseObject.GetQuery ("TestObject").OrderBy("vote").Limit (10);
+
+		query.FindAsync (t =>
+		{
+			
+		});
+		
+		query.GetAsync("WYAnKqCN3X").ContinueWith(t =>
+		{
+			ParseObject gameScore = t.Result;
+			int iid = gameScore.Get<int>("id_num");
+			Debug.Log ("1st place: " + iid);
+		});
+
+*/
+		var query = new ParseQuery<ParseObject> ("TestObject").OrderByDescending("vote").Limit (10);
+		query.FindAsync().ContinueWith(t => 
+		                               {
+			if (t.IsCanceled || t.IsFaulted ) {
+				Debug.Log("Leaderboard Listing Failed");
+			} else 
+			{
+				Debug.Log("Top 10");
+				IEnumerable<ParseObject> results = t.Result;
+				foreach (ParseObject leader in results)  
+				{
+					Debug.Log ("id_num" + leader.Get<int>("id_num") + "|   vote: " + leader.Get<int>("votes"));
+				}
+			}
+		}
+		);
+	}
+
 	IEnumerator loadFile(int i, int idd)
 	{
-		Debug.Log ("load file");
+		//Debug.Log ("load file");
 		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "id_num" , idd);
 
 		var queryTask = query.FirstAsync();
@@ -112,12 +179,13 @@ public class parse_controller: MonoBehaviour {
 		Debug.Log (pfile.Url.AbsoluteUri);
 		var imageRequest = new WWW(pfile.Url.AbsoluteUri);
 		yield return imageRequest;
-		Debug.Log ("imageRequest " + imageRequest.text);
-		//renderer.material.mainTexture = imageRequest.texture;
+		//Debug.Log ("imageRequest " + imageRequest.text);
 		renderer.material.mainTexture = imageRequest.texture;
 
 		pic_arr[i] = imageRequest.texture;
+		ids [i] = idd + 1;
 
+		
 		load_complete = true;
 	}
 

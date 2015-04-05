@@ -24,6 +24,10 @@ public class testing : MonoBehaviour {
 	bool drag;
 	int drag_status; //-1:dislike, 1:like.
 
+	//Like/Dislike
+	public static bool l; 
+	public static bool d;
+
 	//USER
 	string user_name;
 	string status_message;
@@ -60,6 +64,9 @@ public class testing : MonoBehaviour {
 		user_name = "User";
 		hate_like = "";
 		status_message = "";
+
+		l = false;
+		d = false;
 
 		//Pic_arr
 		size = 10;
@@ -265,8 +272,9 @@ public class testing : MonoBehaviour {
 			status_message = user_name + " " + hate_like + " " + "photo " + count;
 			//yield WaitForSeconds(0.5);
 			reset_message();
+		d = true;
 
-			count++;
+		count++;
 			
 			//submit();
 			// TODO: [SERVER]: send message to server!!
@@ -274,7 +282,9 @@ public class testing : MonoBehaviour {
 
 	void like()
 	{
-			hate_like = "likes";
+		l = true;
+
+		hate_like = "likes";
 			status_message = user_name + " " + hate_like + " " + "photo " + count;
 			//yield WaitForSeconds(0.5);
 			reset_message();
@@ -309,17 +319,7 @@ public class testing : MonoBehaviour {
 		if(GUI.Button(new Rect(Screen.width/2 - (float)((button_width * 0.75)/2), Screen.height - Screen.height/5 + (float)(button_width*0.15), (float)(button_width*0.75), (float)(button_width*0.75)), "", info))
 		//if(GUI.Button(new Rect(Screen.width/2 - (button_width*0.75)/2, Screen.height - Screen.height/5 + button_width*0.15, button_width*0.75, button_width*0.75), "", info))
 		{
-
-			Debug.Log ("Hit right."  + "count: " + count);
-			pic_server = parse_controller.pic_arr;
-			load_photo = true;
-			count++;
-
-
-			//TODO: info button.
 			
-			//submit();
-			// TODO: [SERVER]: send message to server!!
 		}
 		
 
@@ -350,13 +350,13 @@ public class testing : MonoBehaviour {
 		//Prompt User to release to like/dislike photo
 		if(pic_x < mainCam.ScreenToWorldPoint(new Vector3(0,0,0)).x)
 		{
-			GUI.Label(new Rect(0,Screen.height/4, Screen.width, Screen.height/2), "RELEASE TO LIKE!" , inv);
+			GUI.Label(new Rect(0,Screen.height/4, Screen.width, Screen.height/2), "RELEASE TO DISLIKE!" , inv);
 		}
 		//when right is is past the right side.
 		else if(pic_x + pic_width > Screen.width)
 		//mainCam.ScreenToWorldPoint(new Vector3(Screen.width,0,0)).x)
 		{
-			GUI.Label(new Rect(0,Screen.height/4, Screen.width, Screen.height/2), "RELEASE TO DISLIKE!" , inv);
+			GUI.Label(new Rect(0,Screen.height/4, Screen.width, Screen.height/2), "RELEASE TO LIKE!" , inv);
 		}
 		else
 		{
