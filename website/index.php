@@ -39,7 +39,7 @@ $path = "img/";
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">CAT: League of Dick Pics</a>
+		      <a class="navbar-brand" href="#">CAT: Cute Animal Tinder</a>
               <a href = "top10.php">
               <button class="btn btn-warning btn-lg" onclick="top10.php"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
 		   	</a>
