@@ -5,10 +5,8 @@ using Parse;
 using System.Collections.Generic;
 
 
-
-
 public class parse_controller: MonoBehaviour {
-	public static Texture2D [] pic_arr = new Texture2D[11];
+	public static Texture2D [] pic_arr = new Texture2D[10];
 
 	string status = "";
 	bool load_complete = false;
@@ -17,10 +15,12 @@ public class parse_controller: MonoBehaviour {
 	string score = "";
 	int num;
 	string s;
-	public static int count=0;
+	int count=0;
 	string[] id = new string[4];
 	bool next = false;
 	public GUIStyle sample;
+	int id_num;
+	int size;
 
 	// Use this for initialization
 	void user_log_in() {
@@ -45,6 +45,8 @@ public class parse_controller: MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{		
+
+
 		if(Input.GetKeyDown("down"))
 		//if (Input.GetTouch(0).phase == TouchPhase.Began)
 		{			
@@ -52,23 +54,37 @@ public class parse_controller: MonoBehaviour {
 			count++;
 			status = "DOWN: " + count;
 		}
+
+		if (testing.download_more) 
+		{
+			testing.download_more = false;
+			download_photos (size);
+		}
 	}
 
 
 
 	void Start()
 	{
-		for (int i=0; i< 11; i++) 
-		{
-			StartCoroutine (loadFile (i));
-		}
-
+		size = 10;
+		id_num = 0;
+		download_photos (10);
 	}
+
+	void download_photos(int size)
+	{
+		for (int i=0; i< size; i++)
+		{
+			StartCoroutine (loadFile (i, id_num));
+			id_num++;
+		}
+	}
+
 	
-	IEnumerator loadFile(int ii)
+	IEnumerator loadFile(int i, int idd)
 	{
 		Debug.Log ("load file");
-		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "id_num" , ii);
+		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "id_num" , idd);
 
 		var queryTask = query.FirstAsync();
 			
@@ -83,7 +99,7 @@ public class parse_controller: MonoBehaviour {
 		//renderer.material.mainTexture = imageRequest.texture;
 		renderer.material.mainTexture = imageRequest.texture;
 
-		pic_arr[ii] = imageRequest.texture;
+		pic_arr[i] = imageRequest.texture;
 
 		load_complete = true;
 	}

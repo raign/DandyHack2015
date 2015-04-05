@@ -18,6 +18,7 @@ public class testing : MonoBehaviour {
 
 	int size;
 	int count;
+	public static bool download_more;
 	public Texture2D[] pic_server;
 
 	bool drag;
@@ -29,7 +30,7 @@ public class testing : MonoBehaviour {
 	string hate_like;
 
 	//Download
-	bool load_photo = false;
+	public static bool load_photo = false;
 
 	//PICTURE FRAME
 	float pic_width;
@@ -48,8 +49,9 @@ public class testing : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+
 		//Texture2D omg = parse_controller.pic_arr[0];
-		mouse = true;
+		mouse = false;
 		pic_width = Screen.width - Screen.width/3;
 		def_pic_x = Screen.width/2 - pic_width/2;
 		def_pic_y = (float)(Screen.height * 0.15);
@@ -64,6 +66,15 @@ public class testing : MonoBehaviour {
 
 		drag = false;
 		drag_status=0;
+
+		download_more = false;
+
+
+
+
+		pic_server = parse_controller.pic_arr;
+		load_photo = true;
+		count++;
 	}
 	
 	// Update is called once per frame
@@ -75,6 +86,12 @@ public class testing : MonoBehaviour {
 			pic_server = parse_controller.pic_arr;
 			load_photo = true;
 			count++;
+		}
+
+		if(Input.GetKeyDown ("up"))
+		{
+			download_more = true;
+			Debug.Log ("up");
 		}
 
 		if(Input.GetKeyDown ("down"))
@@ -203,12 +220,14 @@ public class testing : MonoBehaviour {
 		
 		//CHANGING photos => move along array
 		// make sure texture2D array won't go out of bounds.
-		if (load_photo)
+		if (load_photo && count<size)
 		{
 			pic.normal.background = pic_server[count];
 		}
-		else
+		else if(download_more == false)
 		{
+			Debug.Log ("download_more");
+			download_more = true;
 			count = 0;
 		}
 	}
