@@ -51,10 +51,10 @@ public class testing : MonoBehaviour {
 	{
 
 		//Texture2D omg = parse_controller.pic_arr[0];
-		mouse = false;
+		mouse = true;
 		pic_width = Screen.width - Screen.width/3;
 		def_pic_x = Screen.width/2 - pic_width/2;
-		def_pic_y = (float)(Screen.height * 0.15);
+		def_pic_y = (float)(Screen.height * 0.2);
 
 		//STATUS
 		user_name = "User";
@@ -108,11 +108,12 @@ public class testing : MonoBehaviour {
 			if(Input.GetMouseButtonDown(0)
 			&& (Input.mousePosition.x > def_pic_x) 
 			&& (Input.mousePosition.x < (def_pic_x + pic_width))
-			&& (Input.mousePosition.y > def_pic_y)
-			&& (Input.mousePosition.y < def_pic_y + pic_width)
+			&& (Input.mousePosition.y < (Screen.height- def_pic_y))
+			&& (Input.mousePosition.y > (Screen.height - (def_pic_y + pic_width)))
 			&& drag==false
 			)
 			{
+				Debug.Log ("drag..ON");
 				drag = true;
 				
 				offset_x = Input.mousePosition.x - def_pic_x;
@@ -125,8 +126,8 @@ public class testing : MonoBehaviour {
 			if (Input.GetTouch(0).phase == TouchPhase.Began
 			&& (Input.GetTouch(0).position.x > def_pic_x) 
 			&& (Input.GetTouch(0).position.x < (def_pic_x + pic_width))
-			&& (Input.GetTouch(0).position.y > def_pic_y)
-			&& (Input.GetTouch(0).position.y < def_pic_y + pic_width)
+			&& (Input.GetTouch(0).position.y < (Screen.height- def_pic_y))
+			&& (Input.GetTouch(0).position.y > (Screen.height - (def_pic_y + pic_width)))
 			&& drag==false
 			)
 			{
@@ -171,7 +172,7 @@ public class testing : MonoBehaviour {
 			}
 			else
 			{
-				pic_x = Input.GetTouch(0).position.x;
+				pic_x = Input.GetTouch(0).position.x - offset_x;
 				pic_y = (Screen.height - Input.GetTouch(0).position.y) - offset_y;
 			}
 			
@@ -329,7 +330,7 @@ public class testing : MonoBehaviour {
 		GUI.Box(new Rect(Screen.width/15 + Screen.width/8 + Screen.width/25, Screen.height/40, (float)(Screen.width*0.75), (float)(Screen.height/20)), "", title);
 		
 		
-		GUI.Box(new Rect((float)(def_pic_x*0.7), (float)(def_pic_y*0.8), Screen.width - (float)(def_pic_x * 1.4), (float)(pic_width * 1.5)), "", frame);
+		GUI.Box(new Rect((float)(def_pic_x*0.7), (float)(def_pic_y*0.8), Screen.width - (float)(def_pic_x * 1.4), (float)(pic_width * 1.3)), "", frame);
 
 			//THE ACTUAL PICTURE -> location.
 		//GUI.Box(new Rect(pic_x, pic_y, pic_width, pic_width), "", pic);
