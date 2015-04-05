@@ -10,6 +10,7 @@ public class parse_controller: MonoBehaviour {
 	Texture2D asdf;
 	Texture2D ass;
 	string status = "";
+	bool load_complete = false;
 	int img_num =0;
 	ParseObject test;
 	string score = "";
@@ -49,13 +50,13 @@ public class parse_controller: MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{		
-		//if(Input.GetKeyDown("down"))
-		if (Input.GetTouch(0).phase == TouchPhase.Began)
+		if(Input.GetKeyDown("down"))
+		//if (Input.GetTouch(0).phase == TouchPhase.Began)
 		{			
 			//StopCoroutine(loadFile ());
 			count++;
 			Debug.Log ("down: " + count);
-			status = "DOWN";
+			status = "DOWN" + count;
 			//StartCoroutine (loadFile());
 		}
 	}
@@ -79,28 +80,37 @@ public class parse_controller: MonoBehaviour {
 			Debug.Log ("String: " + s);
 		});
 	}
+
+	void getID()
+	{
+		
+	
+	}
 	
 	void Awake()
 	{
 	}
 
-	Texture2D [] pic_arr = new Texture2D[3];
+	Texture2D [] pic_arr = new Texture2D[11];
 
 	void Start()   //single method downloads file
 	{
-		id [1] = "bOL9HnLMqn";
-		id [2] = "j1HBJC9b4T";
+		//id [1] = "bOL9HnLMqn";
+		//id [2] = "j1HBJC9b4T";
 
-		for (int i=1; i< 3; i++) 
+
+
+		for (int i=0; i< 11; i++) 
 		{
 			StartCoroutine (loadFile (i));
 		}
+
 	}
 	
 	IEnumerator loadFile(int ii)
 	{
 		Debug.Log ("load file");
-		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "objectId" , id[ii]);
+		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "id_num" , ii);
 
 		var queryTask = query.FirstAsync();
 			
@@ -110,18 +120,23 @@ public class parse_controller: MonoBehaviour {
 		ParseFile pfile = obj.Get<ParseFile>("Image" );
 		Debug.Log (pfile.Url.AbsoluteUri);
 		var imageRequest = new WWW(pfile.Url.AbsoluteUri);
-		yield return imageRequest;   
+		yield return imageRequest;
 		Debug.Log ("imageRequest " + imageRequest.text);
 		//renderer.material.mainTexture = imageRequest.texture;
 		renderer.material.mainTexture = imageRequest.texture;
 
 		pic_arr[ii] = imageRequest.texture;
 
+		load_complete = true;
+
 		//yield return ass;
 	}
 
 	void OnGUI()
 	{
+		if (!load_complete) {
+			GUI.Box (new Rect (Screen.width / 4, Screen.height /12, Screen.width / 2, Screen.height / 2), "LOADING...");
+		}
 
 		if (pic_arr[count]!=null) 
 		{

@@ -10,6 +10,10 @@ var info:GUIStyle;
 var pic:GUIStyle;
 var nav: GUIStyle;
 var message:GUIStyle;
+var frame:GUIStyle;
+var bg:GUIStyle;
+var chick_icon:GUIStyle;
+var title:GUIStyle;
 var inv:GUIStyle;
 
 var mainCam:Camera;
@@ -55,7 +59,7 @@ function Start ()
 	//mainCam.WorldToScreenPoint(new Vector3(Screen.width - Screen.width/3,0,0)).x; // = 2/3
 	
 	def_pic_x = Screen.width/2 - pic_width/2;
-	def_pic_y = Screen.height/2 - pic_width/2;
+	def_pic_y = Screen.height * 0.15;
 	
 	user_name = "User";
 	hate_like = "";
@@ -267,23 +271,25 @@ function like()
 
 function OnGUI()
 {
+	GUI.Box(new Rect(0,0,Screen.width, Screen.height), "", bg);
+
 	//INTERFACE BUTTONS ====>
 	
 	//cross
-	var button_width:float = Screen.width/8;
-	if(GUI.Button(new Rect(Screen.width/4, Screen.height - Screen.height/5, button_width, button_width), "", cross))
+	var button_width:float = Screen.width/4;
+	if(GUI.Button(new Rect(Screen.width/8, Screen.height - Screen.height/5, button_width, button_width), "", cross))
 	{
 		dislike();
 	}
 	
 	//heart
-	if(GUI.Button(new Rect(Screen.width/2 + button_width, Screen.height - Screen.height/5, button_width, button_width), "", heart))
+	if(GUI.Button(new Rect(Screen.width - Screen.width/8 - button_width, Screen.height - Screen.height/5, button_width, button_width), "", heart))
 	{
 		like();
 	}
 	
 	//info
-	if(GUI.Button(new Rect(Screen.width/2 - button_width/2, Screen.height - Screen.height/5, button_width, button_width), "", info))
+	if(GUI.Button(new Rect(Screen.width/2 - (button_width*0.75)/2, Screen.height - Screen.height/5 + button_width*0.15, button_width*0.75, button_width*0.75), "", info))
 	{
 		//TODO: info button.
 		
@@ -291,15 +297,22 @@ function OnGUI()
 		// TODO: [SERVER]: send message to server!!
 	}
 	
-	//nav (top of app)
-	GUI.Label(new Rect(0, 0, Screen.width, Screen.height/15), "", nav);
 
-	//THE ACTUAL PICTURE -> location.
+	
+	//nav (top of app)
+	GUI.Label(new Rect(0, 0, Screen.width, Screen.height/10), "", nav);
+	GUI.Box(new Rect(Screen.width/15, 0, Screen.width/8, Screen.width/8), "", chick_icon);
+	GUI.Box(new Rect(Screen.width/15 + Screen.width/8 + Screen.width/25, Screen.height/40, Screen.width*0.75, Screen.height/20), "", title);
+	
+	
+	GUI.Box(new Rect(def_pic_x*0.7, def_pic_y*0.8, Screen.width - (def_pic_x * 1.4), pic_width * 1.5), "", frame);
+
+		//THE ACTUAL PICTURE -> location.
 	GUI.Box(new Rect(pic_x, pic_y, pic_width, pic_width), "", pic);
 
 	//STATUS MESSAGE...
-	GUI.Label(new Rect(0, Screen.height - Screen.height/12, Screen.width, Screen.height/8), "Status: " + status_message, message);
-	message.fontSize = Screen.width/15;
+	//GUI.Label(new Rect(0, Screen.height - Screen.height/12, Screen.width, Screen.height/8), "Status: " + status_message, message);
+	//message.fontSize = Screen.width/15;
 	
 	
 	inv.fontSize = Screen.width/6;
