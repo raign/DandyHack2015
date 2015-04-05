@@ -55,13 +55,13 @@ $path = "img/";
 			</div>
 			<div class="row">
 				<div class="col-xs-2 col-xs-offset-2">
-					<button class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
+					<button class="btn btn-danger btn-lg" onclick="leftButton()"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
 				</div>
 				<div class="col-xs-1 col-xs-offset-1">
 					<button class="btn btn-info btn-lg"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
 				</div>
 				<div class="col-xs-2 col-xs-offset-2">
-					<button class="btn btn-success btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+					<button class="btn btn-success btn-lg" onclick="rightButton()"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
 				</div>
 			</div>
 		</div>

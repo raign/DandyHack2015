@@ -230,3 +230,32 @@ function doAction(params) {
     // return the Deferred so that code can .done() and .fail() it
     return $.ajax(request);
 }
+
+
+//BUTTON ACTION LISTENERS
+function leftButton(){
+	var id = getRandomInt(MIN, MAX);
+	var img = document.getElementById("image_shown");
+	img.src = path.concat(id);
+	img.dataset.num = id;
+}
+
+function rightButton(){
+	//get the current image
+	var img = document.getElementById("image_shown");
+	//update in database if +1
+	doAction({img_num: img.dataset.num}).done(function(data) {
+		if(data.success) {
+			alert("we did it reddit!");
+			//alert(JSON.stringify(data));
+		}
+		}).fail(function(j, t, e) {
+			alert("ajax failed");
+			alert(e);
+		});
+	//randomly generate next image.
+	var id = getRandomInt(MIN, MAX);
+	//change current picture num & path
+	img.src = path.concat(id);
+	img.dataset.num = id;
+}
