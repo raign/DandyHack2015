@@ -152,7 +152,6 @@
 			//change background color
 			swipedElement.style.backgroundColor = 'green';
 			//swipedElement.style.backgroundColor = 'white';
-
 		} 
 	}
 		
@@ -234,13 +233,17 @@ function doAction(params) {
 
 //BUTTON ACTION LISTENERS
 function leftButton(){
+	var swipedElement = document.getElementById("swipeBox");
 	var id = getRandomInt(MIN, MAX);
 	var img = document.getElementById("image_shown");
 	img.src = path.concat(id);
 	img.dataset.num = id;
+	swipedElement.style.backgroundColor = 'red';
 }
 
 function rightButton(){
+	
+	var swipedElement = document.getElementById("swipeBox");
 	//get the current image
 	var img = document.getElementById("image_shown");
 	//update in database if +1
@@ -258,4 +261,5 @@ function rightButton(){
 	//change current picture num & path
 	img.src = path.concat(id);
 	img.dataset.num = id;
+	swipedElement.style.backgroundColor = 'green';
 }
