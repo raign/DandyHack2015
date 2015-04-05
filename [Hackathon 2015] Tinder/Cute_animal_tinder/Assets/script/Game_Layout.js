@@ -20,8 +20,10 @@ var mainCam:Camera;
 
 
 //access array of images
+//var size:int;
+//var pic_arr: Texture2D[]= new Texture2D[5];
 var size:int;
-var pic_arr: Texture2D[]= new Texture2D[5];
+var pic_server: Texture2D[];
 var count:int;
 
 //status_message
@@ -63,9 +65,12 @@ function Start ()
 	
 	user_name = "User";
 	hate_like = "";
-	size = 5;
 	status_message = "";
-	count = 0;
+
+	size = 10;
+	pic_server = new Texture2D[11];
+//	var test: int = parse_controller.count;
+	
 	drag = false;
 	drag_status=0;
 }
@@ -208,7 +213,7 @@ function Update ()
 	// make sure texture2D array won't go out of bounds.
 	if(count < size)
 	{
-		pic.normal.background = pic_arr[count];
+		pic.normal.background = pic_server[count];
 	}
 	else
 	{
