@@ -49,8 +49,8 @@ public class parse_controller: MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{		
-		//if(Input.GetKeyDown("down")) // For computer testing
-		if (Input.GetTouch(0).phase == TouchPhase.Began) // for phone testing
+		//if(Input.GetKeyDown("down"))
+		if (Input.GetTouch(0).phase == TouchPhase.Began)
 		{			
 			//StopCoroutine(loadFile ());
 			count++;
@@ -88,8 +88,6 @@ public class parse_controller: MonoBehaviour {
 
 	void Start()   //single method downloads file
 	{
-
-
 		id [1] = "bOL9HnLMqn";
 		id [2] = "j1HBJC9b4T";
 
@@ -102,22 +100,6 @@ public class parse_controller: MonoBehaviour {
 	IEnumerator loadFile(int ii)
 	{
 		Debug.Log ("load file");
-		/*
-		var query = new ParseQuery<ParseObject> ("Leader Board").OrderByDescending ("vote").Limit (10);
-			query.FindAsync().ContinueWith(t => {
-				if (t.IsCanceled || t.IsFaulted ) {
-				textController.addLines("Leaderboard Listing Failed");
-				textController.showPrompt();
-			} else {
-				textController.addLines("Top 10");
-				IEnumerable<ParseObject> results = t.Result;
-				foreach (ParseObject leader  in results)  {
-					textController.addLines (leader.Get<int>("votes").ToString() + leader.GetObjectID );
-				}
-				textController.showPrompt();
-			}
-		}
-		*/
 		ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject" ).WhereEqualTo( "objectId" , id[ii]);
 
 		var queryTask = query.FirstAsync();
@@ -131,7 +113,7 @@ public class parse_controller: MonoBehaviour {
 		yield return imageRequest;   
 		Debug.Log ("imageRequest " + imageRequest.text);
 		//renderer.material.mainTexture = imageRequest.texture;
-		GetComponent<Renderer>().material.mainTexture = imageRequest.texture;
+		renderer.material.mainTexture = imageRequest.texture;
 
 		pic_arr[ii] = imageRequest.texture;
 
