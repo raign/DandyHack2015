@@ -4,7 +4,6 @@ using System.Collections;
 public class testing : MonoBehaviour {
 	public GUIStyle heart;
 	public GUIStyle cross;
-	public GUIStyle info;
 	public GUIStyle pic;
 	public GUIStyle nav;
 	public GUIStyle message;
@@ -315,12 +314,7 @@ public class testing : MonoBehaviour {
 			like();
 		}
 		
-		//info
-		if(GUI.Button(new Rect(Screen.width/2 - (float)((button_width * 0.75)/2), Screen.height - Screen.height/5 + (float)(button_width*0.15), (float)(button_width*0.75), (float)(button_width*0.75)), "", info))
-		//if(GUI.Button(new Rect(Screen.width/2 - (button_width*0.75)/2, Screen.height - Screen.height/5 + button_width*0.15, button_width*0.75, button_width*0.75), "", info))
-		{
-			
-		}
+	
 		
 
 		
